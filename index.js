@@ -13,11 +13,7 @@ dotenv.config();
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const allowedOrigins = [
-  process.env.FRONTEND_URL,
-  'http://localhost:5173', 
-  'https://frontend4ecommerce.netlify.app'
-];
+
 
 // DB Connection
 connectDB();
@@ -28,16 +24,13 @@ app.use(cookieParser());
 
 
 app.use(cors({
-  origin: function (origin, callback) {
-    // allow requests with no origin like mobile apps or curl
-    if (!origin || allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-    return callback(new Error('Not allowed by CORS'));
-  },
+  origin: [
+    process.env.FRONTEND_URL,
+    'http://localhost:5173',
+    'https://frontend4ecommerce.netlify.app'
+  ],
   credentials: true
 }));
-
 
 // Routes
 app.use('/api/users', userRoutes);
