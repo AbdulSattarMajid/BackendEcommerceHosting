@@ -13,7 +13,7 @@ export const addProduct = async (req, res) => {
             return res.status(400).json({ message: 'Image is required' });
         }
 
-        const imagePath = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+        const imagePath = `${process.env.BACKEND_URL}/uploads/${req.file.filename}`;
         const product = await Product.create({
             name,
             description,
