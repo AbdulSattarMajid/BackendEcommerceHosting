@@ -10,7 +10,7 @@ dotenv.config();
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 export const googleLogin = async (req, res) => {
-  const { token,role } = req.body;
+  const { token, role } = req.body;
 
   try {
     // 1. Verify token with Google
@@ -46,8 +46,8 @@ export const googleLogin = async (req, res) => {
     // 5. Set cookie
     res.cookie('token', authToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
+      secure: true,
+      sameSite: 'None',
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
