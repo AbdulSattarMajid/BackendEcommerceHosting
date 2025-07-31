@@ -24,12 +24,8 @@ app.use(cookieParser());
 
 
 app.use(cors({
-  origin: [
-    process.env.FRONTEND_URL,
-    'http://localhost:5173',
-    'https://frontend4ecommerce.netlify.app'
-  ],
-  credentials: true
+  origin: 'https://frontend4ecommerce.netlify.app',
+  credentials: true,
 }));
 
 // Routes
