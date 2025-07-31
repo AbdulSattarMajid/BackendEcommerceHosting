@@ -13,7 +13,7 @@ export const addProduct = async (req, res) => {
             return res.status(400).json({ message: 'Image is required' });
         }
 
-        const imagePath = `${process.env.BACKEND_URL}/uploads/${req.file.filename}`;
+        const imagePath = `https://your-backend-subdomain.onrender.com/uploads/${req.file.filename}`;
         const product = await Product.create({
             name,
             description,
@@ -110,7 +110,7 @@ export const updateProduct = async (req, res) => {
         }
 
         if (req.file) {
-            const imagePath = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+            const imagePath = `https://your-backend-subdomain.onrender.com/uploads/${req.file.filename}`;
             product.image = imagePath;
         }
 
