@@ -9,9 +9,11 @@ import categoryRoutes from './Routes/categoryRoutes.js'
 import orderRoutes from './Routes/orderRoutes.js'
 import sellerRoutes from './Routes/sellerRoutes.js'
 import wishlistRoutes from './Routes/wishlistRoutes.js'
-
+import adminRoutes from './Routes/adminRoutes.js'
+import searchRoute from './Routes/searchRoute.js'
 import path from 'path';
 import { fileURLToPath } from 'url';
+
 
 dotenv.config();
 const app = express();
@@ -32,15 +34,16 @@ app.use(cors({
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/products', productRoutes);
+app.use("/api/products", searchRoute);
 app.use('/categories', categoryRoutes);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/orders', orderRoutes);
 app.use('/api/seller', sellerRoutes)
 app.use("/api/wishlist", wishlistRoutes);
+app.use('/api/admin', adminRoutes);
 
 
 // Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
