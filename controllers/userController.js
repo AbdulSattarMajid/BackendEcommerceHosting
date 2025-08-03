@@ -172,12 +172,13 @@ export const loginUser = async (req, res) => {
 
     const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, { expiresIn: '7d' });
 
-    res.cookie('token', token, {
+    res.cookie('token', authToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 7 * 24 * 60 * 60 * 1000
+      secure: true,
+      sameSite: 'None',
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
+
 
     res.json({
       success: true,
@@ -209,8 +210,8 @@ export const getProfile = async (req, res) => {
 export const logoutUser = (req, res) => {
   res.clearCookie('token', {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax'
+    secure: true,
+    sameSite: 'None'
   });
   res.json({ success: true, message: 'Logged out' });
 };
