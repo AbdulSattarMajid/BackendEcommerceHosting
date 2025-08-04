@@ -170,7 +170,7 @@ export const loginUser = async (req, res) => {
     if (!user.isVerified)
       return res.status(403).json({ success: false, message: 'Email not verified' });
 
-    const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, { expiresIn: '7d' });
+    const authToken = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, { expiresIn: '7d' });
 
     res.cookie('token', authToken, {
       httpOnly: true,
