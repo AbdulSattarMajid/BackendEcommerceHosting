@@ -13,7 +13,7 @@ export const addProduct = async (req, res) => {
             return res.status(400).json({ message: 'Image is required' });
         }
 
-        const imagePath = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+        const imagePath = req.file.path;
         const product = await Product.create({
             name,
             description,
@@ -110,8 +110,7 @@ export const updateProduct = async (req, res) => {
         }
 
         if (req.file) {
-            const imagePath = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
-            product.image = imagePath;
+            product.image = req.file.path;
         }
 
         const updated = await product.save();
